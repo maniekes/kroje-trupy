@@ -11,6 +11,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  { path: 'autopsy-edit', loadChildren: () => import('./autopsy-edit/autopsy-edit.module').then(m => m.AutopsyEditModule) },
   {
     path: '**',
     component: PageNotFoundComponent
