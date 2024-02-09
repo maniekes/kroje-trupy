@@ -1,8 +1,32 @@
 <div class="container">
-  <h1 class="title">
-dupa
-  </h1>
-
-  <p>autopsy-edit works!</p>
+  <h1 class="title">dupa</h1>
   <a routerLink="/">back</a>
+
+  <form [formGroup]="autopsyForm" (ngSubmit)="saveAutopsy()">
+    <div>
+      <label>Case Number:</label>
+      <input formControlName="caseNumber" type="text">
+    </div>
+    <div>
+      <label>Deceased Name:</label>
+      <input formControlName="deceasedName" type="text">
+    </div>
+    <div>
+      <label>Age:</label>
+      <input formControlName="age" type="number">
+    </div>
+    <!-- Add more fields based on the AutopsyProtocol structure -->
+    <div formGroupName="findings">
+      <label>External Examination:</label>
+      <textarea formControlName="externalExamination"></textarea>
+      <div formGroupName="internalExamination">
+        <label>Brain:</label>
+        <input formControlName="brain" type="text">
+        <!-- Add fields for other organs -->
+      </div>
+      <!-- Additional findings fields -->
+    </div>
+    <button type="submit" [disabled]="!autopsyForm.valid">Save Protocol</button>
+  </form>
+
 </div>
