@@ -13,6 +13,8 @@ const routes: Routes = [
   },
   { path: 'autopsy-edit/:id', loadChildren: () => import('./autopsy-edit/autopsy-edit.module').then(m => m.AutopsyEditModule) },
   { path: 'autopsy-edit', redirectTo: 'autopsy-edit/', pathMatch: 'full' },
+  { path: 'autopsy/:id', loadChildren: () => import('./autopsy/autopsy.module').then(m => m.AutopsyModule) },
+  { path: 'autopsy', redirectTo: 'autopsy/', pathMatch: 'full' },
   {
     path: '**',
     component: PageNotFoundComponent
