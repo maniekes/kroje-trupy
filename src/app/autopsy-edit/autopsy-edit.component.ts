@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {Observable} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-autopsy-edit',
@@ -82,6 +82,10 @@ export class AutopsyEditComponent implements OnInit {
         }
       });
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']); // Navigates back to the home/main page
   }
 
 }
