@@ -13,7 +13,7 @@ import {Observable, switchMap} from "rxjs";
 })
 export class AutopsyEditComponent implements OnInit {
   autopsyForm: FormGroup;
-  autopsyId: string | null | undefined;
+  autopsyId: string | undefined;
   protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
 
   constructor(
@@ -22,7 +22,6 @@ export class AutopsyEditComponent implements OnInit {
     private autopsyProtocolService: AutopsyService,
     private router: Router // Inject the Router service
   ) {
-    this.autopsyId = this.route.snapshot.params['id'];
     this.autopsyForm = this.fb.group({
       caseNumber: ['', Validators.required],
       deceasedName: ['', Validators.required],
@@ -53,14 +52,16 @@ export class AutopsyEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.autopsyId);
-    if (this.autopsyId) {
-      this.autopsyProtocolService.getAutopsyProtocolById(this.autopsyId).subscribe((autopsy: AutopsyProtocol | undefined) => {
-        if (autopsy) {
-          this.autopsyForm.patchValue(autopsy);
-        }
-      });
-    }
+    this.route.params.pipe(
+      switchMap(params => this.autopsyProtocolService.getAutopsyProtocolById(<string>params['id']))
+    ).subscribe(autopsy => {
+      // Assign the data to a property to display in the template
+      this.autopsyForm.reset();
+      if (autopsy) {
+        this.autopsyId = autopsy.id;
+        this.autopsyForm.patchValue(autopsy);
+      }
+    });
   }
 
   saveAutopsy() {
@@ -72,16 +73,6 @@ export class AutopsyEditComponent implements OnInit {
 
   onProtocolSelect(autopsyId: string): void {
     this.router.navigate(['/autopsy-edit', autopsyId]);
-    if (autopsyId === "") {
-      this.autopsyForm.reset();
-    } else {
-      this.autopsyProtocolService.getAutopsyProtocolById(autopsyId).subscribe((autopsy: AutopsyProtocol | undefined) => {
-        if (autopsy) {
-          this.autopsyForm.reset();
-          this.autopsyForm.patchValue(autopsy);
-        }
-      });
-    }
   }
 
   goBack(): void {
