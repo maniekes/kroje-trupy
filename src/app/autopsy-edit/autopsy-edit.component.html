@@ -1,3 +1,19 @@
+<div class="protocol-selector">
+  <mat-form-field appearance="fill">
+    <mat-label>Select Protocol</mat-label>
+    <mat-select (selectionChange)="onProtocolSelect($event.value)">
+      <mat-option value="">add new</mat-option>
+      <mat-option *ngFor="let protocol of protocols$ | async" [value]="protocol.id">
+        {{ protocol.caseNumber }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="autopsy-protocol-header">
+  <h2>Autopsy Protocol Editor</h2>
+</div>
+
 <form [formGroup]="autopsyForm" (ngSubmit)="saveAutopsy()" class="autopsy-form">
   <mat-form-field appearance="fill">
     <mat-label>Case Number</mat-label>
@@ -117,3 +133,7 @@
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!autopsyForm.valid">Save Protocol</button>
 </form>
+
+<div class="autopsy-protocol-footer">
+  <p>Confidential - For authorized personnel only</p>
+</div>

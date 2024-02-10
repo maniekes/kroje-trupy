@@ -10,3 +10,20 @@ mat-form-field {
   width: 100%;
   margin-bottom: 16px;
 }
+
+.autopsy-protocol-header, .autopsy-protocol-footer {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.autopsy-protocol-header h2 {
+  color: #3f51b5; /* Example color; adjust as needed */
+}
+
+.autopsy-protocol-footer p {
+  color: #757575; /* Example color; adjust as needed */
+}
+
+.protocol-selector {
+  margin-bottom: 20px;
+}

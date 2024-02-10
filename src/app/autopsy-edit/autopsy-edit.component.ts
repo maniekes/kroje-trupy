@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-autopsy-edit',
@@ -13,11 +14,13 @@ import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 export class AutopsyEditComponent implements OnInit {
   autopsyForm: FormGroup;
   autopsyId: string | null | undefined;
+  protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private autopsyProtocolService: AutopsyService
+    private autopsyProtocolService: AutopsyService,
+    private router: Router // Inject the Router service
   ) {
     this.autopsyId = this.route.snapshot.params['id'];
     this.autopsyForm = this.fb.group({
@@ -46,6 +49,7 @@ export class AutopsyEditComponent implements OnInit {
         conclusion: ['']
       })
     });
+    this.protocols$ = this.autopsyProtocolService.getAutopsyProtocols(); // Fetch the protocols
   }
 
   ngOnInit() {
@@ -65,4 +69,19 @@ export class AutopsyEditComponent implements OnInit {
       // Here you would call the service to update the autopsy protocol
     }
   }
+
+  onProtocolSelect(autopsyId: string): void {
+    this.router.navigate(['/autopsy-edit', autopsyId]);
+    if (autopsyId === "") {
+      this.autopsyForm.reset();
+    } else {
+      this.autopsyProtocolService.getAutopsyProtocolById(autopsyId).subscribe((autopsy: AutopsyProtocol | undefined) => {
+        if (autopsy) {
+          this.autopsyForm.reset();
+          this.autopsyForm.patchValue(autopsy);
+        }
+      });
+    }
+  }
+
 }

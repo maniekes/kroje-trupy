@@ -10,12 +10,10 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {
   MatDatepicker,
   MatDatepickerInput,
-  MatDatepickerModule,
   MatDatepickerToggle
 } from "@angular/material/datepicker";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
