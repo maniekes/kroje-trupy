@@ -88,4 +88,8 @@ export class AutopsyEditComponent implements OnInit {
     this.router.navigate(['/']); // Navigates back to the home/main page
   }
 
+  printView(): void {
+    this.router.navigate(['/autopsy', this.autopsyId]);
+  }
+
 }

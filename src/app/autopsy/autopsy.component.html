@@ -1,1 +1,31 @@
-<p>autopsy works!</p>
+<div class="autopsy-report">
+  <header>
+    <h1>Autopsy Report</h1>
+    <p><strong>Case Number:</strong> {{ autopsyData.caseNumber }}</p>
+    <!-- Add more header info as needed -->
+  </header>
+
+  <section>
+    <h2>Deceased Information</h2>
+    <p><strong>Name:</strong> {{ autopsyData.deceasedName }}</p>
+    <p><strong>Age:</strong> {{ autopsyData.age }}</p>
+    <p><strong>Gender:</strong> {{ autopsyData.gender }}</p>
+    <!-- Add more deceased info as needed -->
+  </section>
+
+  <section>
+    <h2>Findings</h2>
+    <p><strong>External Examination:</strong> {{ autopsyData.findings?.externalExamination }}</p>
+    <!-- Repeat for other findings -->
+  </section>
+
+  <!-- Add more sections as needed -->
+
+  <footer>
+    <p>Autopsy performed by: {{ autopsyData.autopsyPerformedBy }}</p>
+    <p>Date of Autopsy: {{ autopsyData.dateOfAutopsy | date: 'longDate' }}</p>
+  </footer>
+</div>
+
+<button (click)="printPage()">Print Report</button>
+<button (click)="editPage()">Edit Report</button>

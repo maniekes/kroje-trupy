@@ -1,0 +1,32 @@
+.autopsy-report {
+  font-family: 'Times New Roman', Times, serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+header, section, footer {
+  margin-bottom: 20px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+/* Print-specific styles */
+@media print {
+  body, html {
+    width: 100%;
+  }
+
+  .autopsy-report {
+    max-width: 100%;
+    page-break-after: always;
+  }
+
+  button {
+    display: none; /* Hide buttons and other UI elements not needed in print */
+  }
+
+  /* Add more print-specific styling as needed */
+}
