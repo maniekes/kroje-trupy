@@ -26,7 +26,7 @@ export class AutopsyEditComponent implements OnInit {
       age: [null, Validators.required],
       gender: [null, Validators.required],
       dateOfDeath: [null, Validators.required],
-      dateOfAutopsy: [null, Validators.required],
+      dateOfAutopsy: ['', Validators.required],
       placeOfDeath: [''],
       causeOfDeath: [''],
       mannerOfDeath: [null, Validators.required],
