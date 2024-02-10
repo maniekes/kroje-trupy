@@ -30,6 +30,9 @@ export class AutopsyComponent implements OnInit{
     }
   }
 
+  goBack(): void {
+    this.router.navigate(['/']); // Navigates back to the home/main page
+  }
   printPage(): void {
     window.print();
   }

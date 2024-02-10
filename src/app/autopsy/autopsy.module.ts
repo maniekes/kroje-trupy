@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AutopsyRoutingModule } from './autopsy-routing.module';
 import { AutopsyComponent } from './autopsy.component';
+import {MatButton} from "@angular/material/button";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AutopsyComponent } from './autopsy.component';
   ],
   imports: [
     CommonModule,
-    AutopsyRoutingModule
+    AutopsyRoutingModule,
+    MatButton
   ]
 })
 export class AutopsyModule { }
