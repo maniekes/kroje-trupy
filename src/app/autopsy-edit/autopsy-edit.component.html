@@ -37,7 +37,83 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 
-  <!-- Add more fields as needed -->
+  <!-- Include the previously discussed fields here -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Place of Death</mat-label>
+    <input matInput formControlName="placeOfDeath">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cause of Death</mat-label>
+    <input matInput formControlName="causeOfDeath">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Manner of Death</mat-label>
+    <mat-select formControlName="mannerOfDeath">
+      <mat-option value="Natural">Natural</mat-option>
+      <mat-option value="Accident">Accident</mat-option>
+      <mat-option value="Homicide">Homicide</mat-option>
+      <mat-option value="Suicide">Suicide</mat-option>
+      <mat-option value="Undetermined">Undetermined</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div formGroupName="findings">
+    <mat-form-field appearance="fill">
+      <mat-label>External Examination</mat-label>
+      <textarea matInput formControlName="externalExamination"></textarea>
+    </mat-form-field>
+
+    <div formGroupName="internalExamination">
+      <mat-form-field appearance="fill">
+        <mat-label>Brain</mat-label>
+        <input matInput formControlName="brain">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Heart</mat-label>
+        <input matInput formControlName="heart">
+      </mat-form-field>
+
+      <!-- Repeat for other internal organs as needed -->
+      <mat-form-field appearance="fill">
+        <mat-label>Lungs</mat-label>
+        <input matInput formControlName="lungs">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Liver</mat-label>
+        <input matInput formControlName="liver">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Kidneys</mat-label>
+        <input matInput formControlName="kidneys">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Other Notes</mat-label>
+        <textarea matInput formControlName="otherNotes"></textarea>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Toxicology Results</mat-label>
+      <textarea matInput formControlName="toxicologyResults"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Microscopic Examinations</mat-label>
+      <textarea matInput formControlName="microscopicExaminations"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Conclusion</mat-label>
+      <textarea matInput formControlName="conclusion"></textarea>
+    </mat-form-field>
+  </div>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!autopsyForm.valid">Save Protocol</button>
 </form>
