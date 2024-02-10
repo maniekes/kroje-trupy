@@ -1,32 +1,43 @@
-<div class="container">
-  <h1 class="title">dupa</h1>
-  <a routerLink="/">back</a>
+<form [formGroup]="autopsyForm" (ngSubmit)="saveAutopsy()" class="autopsy-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Case Number</mat-label>
+    <input matInput formControlName="caseNumber">
+  </mat-form-field>
 
-  <form [formGroup]="autopsyForm" (ngSubmit)="saveAutopsy()">
-    <div>
-      <label>Case Number:</label>
-      <input formControlName="caseNumber" type="text">
-    </div>
-    <div>
-      <label>Deceased Name:</label>
-      <input formControlName="deceasedName" type="text">
-    </div>
-    <div>
-      <label>Age:</label>
-      <input formControlName="age" type="number">
-    </div>
-    <!-- Add more fields based on the AutopsyProtocol structure -->
-    <div formGroupName="findings">
-      <label>External Examination:</label>
-      <textarea formControlName="externalExamination"></textarea>
-      <div formGroupName="internalExamination">
-        <label>Brain:</label>
-        <input formControlName="brain" type="text">
-        <!-- Add fields for other organs -->
-      </div>
-      <!-- Additional findings fields -->
-    </div>
-    <button type="submit" [disabled]="!autopsyForm.valid">Save Protocol</button>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Deceased Name</mat-label>
+    <input matInput formControlName="deceasedName">
+  </mat-form-field>
 
-</div>
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input matInput type="number" formControlName="age">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender">
+      <mat-option value="Male">Male</mat-option>
+      <mat-option value="Female">Female</mat-option>
+      <mat-option value="Other">Other</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Death</mat-label>
+    <input matInput [matDatepicker]="picker1" formControlName="dateOfDeath">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Autopsy</mat-label>
+    <input matInput [matDatepicker]="picker2" formControlName="dateOfAutopsy">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Add more fields as needed -->
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!autopsyForm.valid">Save Protocol</button>
+</form>
