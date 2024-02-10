@@ -4,7 +4,7 @@
 <div class="protocol-selector">
   <mat-form-field appearance="fill">
     <mat-label>Select Protocol</mat-label>
-    <mat-select (selectionChange)="onProtocolSelect($event.value)">
+    <mat-select [formControl]="selectedProtocol" (selectionChange)="onProtocolSelect($event.value)">
       <mat-option value="">add new</mat-option>
       <mat-option *ngFor="let protocol of protocols$ | async" [value]="protocol.id">
         {{ protocol.caseNumber }}

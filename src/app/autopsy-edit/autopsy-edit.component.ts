@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
@@ -15,7 +15,7 @@ export class AutopsyEditComponent implements OnInit {
   autopsyForm: FormGroup;
   autopsyId: string | undefined;
   protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
-
+  selectedProtocol = new FormControl('');
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -57,8 +57,9 @@ export class AutopsyEditComponent implements OnInit {
     ).subscribe(autopsy => {
       // Assign the data to a property to display in the template
       this.autopsyForm.reset();
-      if (autopsy) {
+      if (autopsy?.id) {
         this.autopsyId = autopsy.id;
+        this.selectedProtocol.setValue(autopsy.id);
         this.autopsyForm.patchValue(autopsy);
       }
     });
