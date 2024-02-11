@@ -23,15 +23,16 @@ export class AutopsyEditComponent implements OnInit {
     private router: Router // Inject the Router service
   ) {
     this.autopsyForm = this.fb.group({
+      id: [''],
       caseNumber: ['', Validators.required],
-      deceasedName: ['', Validators.required],
-      age: [null, Validators.required],
-      gender: [null, Validators.required],
-      dateOfDeath: [null, Validators.required],
-      dateOfAutopsy: ['', Validators.required],
+      deceasedName: [''],
+      age: [null],
+      gender: [null],
+      dateOfDeath: [null],
+      dateOfAutopsy: [''],
       placeOfDeath: [''],
       causeOfDeath: [''],
-      mannerOfDeath: [null, Validators.required],
+      mannerOfDeath: [null],
       autopsyPerformedBy: [''],
       findings: this.fb.group({
         externalExamination: [''],
@@ -68,7 +69,7 @@ export class AutopsyEditComponent implements OnInit {
   saveAutopsy() {
     if (this.autopsyForm.valid) {
       console.log(this.autopsyForm.value);
-      // Here you would call the service to update the autopsy protocol
+      this.autopsyProtocolService.save(<AutopsyProtocol> this.autopsyForm.value);
     }
   }
 
