@@ -14,6 +14,7 @@ import {
 } from "@angular/material/datepicker";
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {MatInput} from "@angular/material/input";
     AutopsyEditComponent
   ],
   imports: [
+    MatAutocompleteModule,
     CommonModule,
     ReactiveFormsModule,
     AutopsyEditRoutingModule,

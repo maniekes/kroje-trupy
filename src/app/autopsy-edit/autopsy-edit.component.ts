@@ -4,7 +4,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {Observable, switchMap} from "rxjs";
+import {map, Observable, startWith, switchMap} from "rxjs";
+import {AutoComplementService} from "../core/services/autoComplement/auto-complement.service";
+import {AutoCompletionObject} from "../core/models/auto-completion-object.model";
 
 @Component({
   selector: 'app-autopsy-edit',
@@ -16,11 +18,14 @@ export class AutopsyEditComponent implements OnInit {
   autopsyId: string | undefined;
   protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
   selectedProtocol = new FormControl('');
+  filteredSuggestions: { [key: string]: Observable<AutoCompletionObject[]> } = {};
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private autopsyProtocolService: AutopsyService,
-    private router: Router // Inject the Router service
+    private router: Router,
+    private autoComplementService: AutoComplementService
   ) {
     this.autopsyForm = this.fb.group({
       id: [''],
@@ -64,6 +69,11 @@ export class AutopsyEditComponent implements OnInit {
         this.autopsyForm.patchValue(autopsy);
       }
     });
+    this.setupAutocomplete('brain');
+    this.setupAutocomplete('liver');
+    this.setupAutocomplete('heart');
+    this.setupAutocomplete('lungs');
+    this.setupAutocomplete('kidneys');
   }
 
   saveAutopsy() {
@@ -85,4 +95,18 @@ export class AutopsyEditComponent implements OnInit {
     this.router.navigate(['/autopsy', this.autopsyId]);
   }
 
+  private setupAutocomplete(fieldName: string): void {
+    const control = this.autopsyForm.get(`findings.internalExamination.${fieldName}`) as FormControl;
+    this.filteredSuggestions[fieldName] = control.valueChanges.pipe(
+      startWith(''), // Start with an empty string to load all suggestions initially
+      switchMap(value => {
+        // Fetch and filter suggestions based on the current input
+        return this.autoComplementService.getSuggestions(fieldName, value);
+      })
+    );
+  }
+
+  displayFn(suggestion: AutoCompletionObject): string {
+    return suggestion && suggestion.value ? suggestion.value : '';
+  }
 }

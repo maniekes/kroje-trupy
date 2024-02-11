@@ -88,28 +88,53 @@
     <div formGroupName="internalExamination">
       <mat-form-field appearance="fill">
         <mat-label>Brain</mat-label>
-        <input matInput formControlName="brain">
+        <input type="text" matInput formControlName="brain" [matAutocomplete]="brainAuto">
+        <mat-autocomplete #brainAuto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let suggestion of filteredSuggestions.brain | async" [value]="suggestion">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Heart</mat-label>
-        <input matInput formControlName="heart">
+        <input type="text" matInput formControlName="heart" [matAutocomplete]="heartAuto">
+        <mat-autocomplete #heartAuto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let suggestion of filteredSuggestions.heart | async" [value]="suggestion">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <!-- Repeat for other internal organs as needed -->
       <mat-form-field appearance="fill">
         <mat-label>Lungs</mat-label>
-        <input matInput formControlName="lungs">
+        <input type="text" matInput formControlName="lungs" [matAutocomplete]="lungsAuto">
+        <mat-autocomplete #lungsAuto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let suggestion of filteredSuggestions.lungs | async" [value]="suggestion">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Liver</mat-label>
-        <input matInput formControlName="liver">
+        <input type="text" matInput formControlName="liver" [matAutocomplete]="liverAuto">
+        <mat-autocomplete #liverAuto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let suggestion of filteredSuggestions.liver | async" [value]="suggestion">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Kidneys</mat-label>
-        <input matInput formControlName="kidneys">
+        <input type="text" matInput formControlName="kidneys" [matAutocomplete]="kidneysAuto">
+        <mat-autocomplete #kidneysAuto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let suggestion of filteredSuggestions.kidneys | async" [value]="suggestion">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
