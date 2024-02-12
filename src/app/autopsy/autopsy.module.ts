@@ -8,6 +8,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AutopsyDisplayComponent} from "../autopsy-display/autopsy-display.component";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatLabel,
     MatOption,
     MatSelect,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutopsyDisplayComponent
   ]
 })
 export class AutopsyModule { }

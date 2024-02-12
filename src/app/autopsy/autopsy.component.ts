@@ -14,7 +14,7 @@ export class AutopsyComponent implements OnInit {
   autopsyData: AutopsyProtocol = {};
   autopsyId: string | null | undefined;
   selectedProtocol = new FormControl('');
-  protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
+  protocols: AutopsyProtocol[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +22,6 @@ export class AutopsyComponent implements OnInit {
     private autopsyProtocolService: AutopsyService
   ) {
     this.autopsyId = this.route.snapshot.params['id'];
-    this.protocols$ = this.autopsyProtocolService.getAutopsyProtocols(); // Fetch the protocols
   }
 
   ngOnInit() {
@@ -35,6 +34,7 @@ export class AutopsyComponent implements OnInit {
         this.autopsyData = autopsy;
       }
     });
+    this.autopsyProtocolService.getAutopsyProtocols().subscribe(protocols => this.protocols = protocols); // Fetch the protocols
   }
 
   goBack(): void {
