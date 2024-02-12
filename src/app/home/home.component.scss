@@ -1,3 +1,16 @@
-:host {
-  
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.report-card {
+  width: 300px; /* Adjust based on your preference */
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
 }

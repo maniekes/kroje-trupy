@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AutopsyService} from "../core/services/autopsy/autopsy.service";
+import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +10,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  protocols: AutopsyProtocol[] = [];
+
+  constructor(private router: Router,
+              private autopsyProtocolService: AutopsyService,
+  ) {
+
+
+  }
 
   ngOnInit(): void {
     console.log('HomeComponent INIT');
+    this.autopsyProtocolService.getAutopsyProtocols().subscribe(protocols => this.protocols = protocols);
   }
 
 }

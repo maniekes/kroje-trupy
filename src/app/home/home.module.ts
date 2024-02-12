@@ -5,10 +5,12 @@ import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
-import {MatAnchor} from "@angular/material/button";
+import {MatAnchor, MatButton} from "@angular/material/button";
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 
 @NgModule({
   declarations: [HomeComponent],
-    imports: [CommonModule, SharedModule, HomeRoutingModule, MatAnchor]
+  imports: [CommonModule, SharedModule, HomeRoutingModule, MatAnchor, MatToolbar, MatCard, MatCardHeader, MatCardContent, MatCardActions, MatButton]
 })
 export class HomeModule {}
