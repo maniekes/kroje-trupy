@@ -4,7 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {map, Observable, startWith, switchMap} from "rxjs";
+import {Observable, startWith, switchMap} from "rxjs";
 import {AutoComplementService} from "../core/services/autoComplement/auto-complement.service";
 import {AutoCompletionObject} from "../core/models/auto-completion-object.model";
 
@@ -54,9 +54,9 @@ export class AutopsyEditComponent implements OnInit {
         conclusion: ['']
       })
     });
+    //TODO: remove this from constructor
     this.protocols$ = this.autopsyProtocolService.getAutopsyProtocols(); // Fetch the protocols
   }
-
   ngOnInit() {
     this.route.params.pipe(
       switchMap(params => this.autopsyProtocolService.getAutopsyProtocolById(<string>params['id']))
@@ -75,6 +75,7 @@ export class AutopsyEditComponent implements OnInit {
     this.setupAutocomplete('lungs');
     this.setupAutocomplete('kidneys');
   }
+
 
   saveAutopsy() {
     if (this.autopsyForm.valid) {

@@ -27,6 +27,9 @@ h1, h2 {
   button {
     display: none; /* Hide buttons and other UI elements not needed in print */
   }
+  .noprint {
+    display: none;
+  }
 
   /* Add more print-specific styling as needed */
 }

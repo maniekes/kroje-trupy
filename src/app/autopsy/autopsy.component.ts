@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
-import {switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-autopsy',
@@ -12,6 +13,8 @@ import {switchMap} from "rxjs";
 export class AutopsyComponent implements OnInit {
   autopsyData: AutopsyProtocol = {};
   autopsyId: string | null | undefined;
+  selectedProtocol = new FormControl('');
+  protocols$: Observable<AutopsyProtocol[]>; // Assuming AutopsyProtocol has an id and a name
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +22,7 @@ export class AutopsyComponent implements OnInit {
     private autopsyProtocolService: AutopsyService
   ) {
     this.autopsyId = this.route.snapshot.params['id'];
+    this.protocols$ = this.autopsyProtocolService.getAutopsyProtocols(); // Fetch the protocols
   }
 
   ngOnInit() {
@@ -45,4 +49,7 @@ export class AutopsyComponent implements OnInit {
     this.router.navigate(['/autopsy-edit', this.autopsyId]);
   }
 
+  onProtocolSelect(autopsyId: string): void {
+    this.router.navigate(['/autopsy', autopsyId]);
+  }
 }
