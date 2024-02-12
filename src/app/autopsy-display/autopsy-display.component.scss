@@ -1,14 +1,53 @@
 .autopsy-report {
-  font-family: 'Times New Roman', Times, serif;
-  padding: 20px;
   max-width: 800px;
   margin: auto;
 }
 
-header, section, footer {
-  margin-bottom: 20px;
+mat-card {
+  margin-top: 20px;
 }
 
-h1, h2 {
-  color: #333;
+h2 {
+  margin-top: 20px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+/* Print-specific styles */
+@media print {
+  body, html, .autopsy-report, mat-card {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  body {
+    color: black;
+  }
+
+  mat-card {
+    box-shadow: none; /* Remove card shadows */
+    border: none; /* Remove borders */
+  }
+
+  mat-card-header, mat-card-content, mat-card-footer {
+    display: block;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .mat-card-title, .mat-card-subtitle, p, h2 {
+    color: black; /* Ensure text is black for better print contrast */
+  }
+
+  /* Hide elements not needed for print */
+  .print-hide {
+    display: none;
+  }
+
+  h2 {
+    font-size: 1.2em; /* Adjust heading sizes for print, if necessary */
+  }
 }

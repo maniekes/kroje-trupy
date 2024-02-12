@@ -1,28 +1,37 @@
-<div class="autopsy-report">
-  <header>
-    <h1>Autopsy Report</h1>
-    <p><strong>Case Number:</strong> {{ protocol.caseNumber }}</p>
-    <!-- Add more header info as needed -->
-  </header>
+<div class="autopsy-report mat-typography">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Autopsy Report: {{ protocol.caseNumber }}</mat-card-title>
+      <mat-card-subtitle>{{ protocol.deceasedName }}</mat-card-subtitle>
+    </mat-card-header>
 
-  <section>
-    <h2>Deceased Information</h2>
-    <p><strong>Name:</strong> {{ protocol.deceasedName }}</p>
-    <p><strong>Age:</strong> {{ protocol.age }}</p>
-    <p><strong>Gender:</strong> {{ protocol.gender }}</p>
-    <!-- Add more deceased info as needed -->
-  </section>
+    <mat-card-content>
+      <h2>Deceased Information</h2>
+      <p><strong>Name:</strong> {{ protocol.deceasedName }}</p>
+      <p><strong>Age:</strong> {{ protocol.age }}</p>
+      <p><strong>Gender:</strong> {{ protocol.gender }}</p>
+      <p><strong>Date of Death:</strong> {{ protocol.dateOfDeath | date: 'longDate' }}</p>
+      <p><strong>Place of Death:</strong> {{ protocol.placeOfDeath }}</p>
 
-  <section>
-    <h2>Findings</h2>
-    <p><strong>External Examination:</strong> {{ protocol.findings?.externalExamination }}</p>
-    <!-- Repeat for other findings -->
-  </section>
+      <h2>Autopsy Details</h2>
+      <p><strong>Cause of Death:</strong> {{ protocol.causeOfDeath }}</p>
+      <p><strong>Manner of Death:</strong> {{ protocol.mannerOfDeath }}</p>
+      <p><strong>Autopsy Performed By:</strong> {{ protocol.autopsyPerformedBy }}</p>
+      <p><strong>Date of Autopsy:</strong> {{ protocol.dateOfAutopsy | date: 'longDate' }}</p>
 
-  <!-- Add more sections as needed -->
+      <h2>Findings</h2>
+      <p><strong>External Examination:</strong> {{ protocol.findings?.externalExamination }}</p>
+      <p><strong>Brain:</strong> {{ protocol.findings?.internalExamination?.brain }}</p>
+      <p><strong>Heart:</strong> {{ protocol.findings?.internalExamination?.heart }}</p>
+      <p><strong>Lungs:</strong> {{ protocol.findings?.internalExamination?.lungs }}</p>
+      <p><strong>Liver:</strong> {{ protocol.findings?.internalExamination?.liver }}</p>
+      <p><strong>Kidneys:</strong> {{ protocol.findings?.internalExamination?.kidneys }}</p>
+      <p><strong>Other Notes:</strong> {{ protocol.findings?.internalExamination?.otherNotes }}</p>
 
-  <footer>
-    <p>Autopsy performed by: {{ protocol.autopsyPerformedBy }}</p>
-    <p>Date of Autopsy: {{ protocol.dateOfAutopsy | date: 'longDate' }}</p>
-  </footer>
+      <h2>Additional Information</h2>
+      <p><strong>Toxicology Results:</strong> {{ protocol.findings?.toxicologyResults }}</p>
+      <p><strong>Microscopic Examinations:</strong> {{ protocol.findings?.microscopicExaminations }}</p>
+      <p><strong>Conclusion:</strong> {{ protocol.findings?.conclusion }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
