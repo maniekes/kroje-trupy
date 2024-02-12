@@ -1,20 +1,23 @@
 <button mat-button (click)="goBack()">Back to Home</button>
-<button mat-button (click)="printPage()">Print Report</button>
-<button mat-button (click)="editPage()">Edit Report</button>
+<button mat-button *ngIf="isEditing" (click)="printPage()">Display Report</button>
+<button mat-button *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
+<button mat-button *ngIf="!isEditing" (click)="print()">Print Report</button>
 
 <div class="protocol-selector noprint">
-  <mat-form-field appearance="fill">
-    <mat-label>Select Protocol</mat-label>
-    <mat-select [formControl]="selectedProtocol" (selectionChange)="onProtocolSelect($event.value)">
-      <mat-option *ngFor="let protocol of protocols" [value]="protocol.id">
-        {{ protocol.caseNumber }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Select Protocol</mat-label>
+        <mat-select [formControl]="selectedProtocol" (selectionChange)="onProtocolSelect($event.value)">
+            <mat-option *ngFor="let protocol of protocols" [value]="protocol.id">
+                {{ protocol.caseNumber }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 
-<app-autopsy-display [protocol]="autopsyData"></app-autopsy-display>
+<app-autopsy-display *ngIf="!isEditing" [protocol]="autopsyData"></app-autopsy-display>
+<app-autopsy-edit *ngIf="isEditing" [protocol]="autopsyData" (saveProtocol)="saveAutopsy($event)"></app-autopsy-edit>
 
 <button mat-button (click)="goBack()">Back to Home</button>
-<button mat-button (click)="printPage()">Print Report</button>
-<button mat-button (click)="editPage()">Edit Report</button>
+<button mat-button *ngIf="isEditing" (click)="printPage()">Display Report</button>
+<button mat-button *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
+<button mat-button *ngIf="!isEditing" (click)="print()">Print Report</button>
