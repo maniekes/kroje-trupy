@@ -1,7 +1,7 @@
-<button mat-button (click)="goBack()">Back to Home</button>
-<button mat-button *ngIf="isEditing" (click)="printPage()">Display Report</button>
-<button mat-button *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
-<button mat-button *ngIf="!isEditing" (click)="print()">Print Report</button>
+<button mat-button mat-raised-button color="primary" (click)="goBack()">Back to Home</button>
+<button mat-button mat-raised-button color="primary" *ngIf="isEditing" (click)="printPage()">Display Report</button>
+<button mat-button mat-raised-button color="primary" *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
+<button mat-button mat-raised-button color="primary" *ngIf="!isEditing" (click)="print()">Print Report</button>
 
 <div class="protocol-selector noprint">
     <mat-form-field appearance="fill">
@@ -17,7 +17,7 @@
 <app-autopsy-display *ngIf="!isEditing" [protocol]="autopsyData"></app-autopsy-display>
 <app-autopsy-edit *ngIf="isEditing" [protocol]="autopsyData" (saveProtocol)="saveAutopsy($event)"></app-autopsy-edit>
 
-<button mat-button (click)="goBack()">Back to Home</button>
-<button mat-button *ngIf="isEditing" (click)="printPage()">Display Report</button>
-<button mat-button *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
-<button mat-button *ngIf="!isEditing" (click)="print()">Print Report</button>
+<button mat-button mat-raised-button color="primary" (click)="goBack()">Back to Home</button>
+<button mat-button mat-raised-button color="primary" *ngIf="isEditing" (click)="printPage()">Display Report</button>
+<button mat-button mat-raised-button color="primary" *ngIf="!isEditing" (click)="editPage()">Edit Report</button>
+<button mat-button mat-raised-button color="primary" *ngIf="!isEditing" (click)="print()">Print Report</button>
