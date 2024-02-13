@@ -68,7 +68,7 @@ export class AutopsyComponent implements OnInit {
     }
   }
 
-  onProtocolSelect(autopsyId: string): void {
+  onProtocolSelect(autopsyId: string | undefined): void {
     const e = this.isEditing ? 'edit' : 'display';
     this.router.navigate(['/autopsy', autopsyId, e]);
   }
