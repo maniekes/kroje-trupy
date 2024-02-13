@@ -1,10 +1,11 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {filter, map, Observable, of, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ElectronService} from "../core/services";
+import {AutopsyEditComponent} from "../autopsy-edit/autopsy-edit.component";
 
 @Component({
   selector: 'app-autopsy',
@@ -17,6 +18,7 @@ export class AutopsyComponent implements OnInit {
   selectedProtocol = new FormControl('');
   protocols: AutopsyProtocol[] = [];
   isEditing: boolean = false;
+  @ViewChild(AutopsyEditComponent) autopsyEditComponent!: AutopsyEditComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -90,6 +92,12 @@ export class AutopsyComponent implements OnInit {
   toggleEditMode(checked: boolean) {
     const e = checked ? 'edit' : 'display';
     this.router.navigate(['/autopsy', this.autopsyId, e]);
+  }
 
+  triggerSaveAutopsy(): void {
+    // Directly call the saveAutopsy method on the child component
+    if (this.autopsyEditComponent) {
+      this.autopsyEditComponent.saveAutopsy();
+    }
   }
 }
