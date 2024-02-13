@@ -1,8 +1,8 @@
-import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
-import {filter, map, Observable, of, switchMap} from "rxjs";
+import {of, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ElectronService} from "../core/services";
 import {AutopsyEditComponent} from "../autopsy-edit/autopsy-edit.component";
@@ -70,6 +70,7 @@ export class AutopsyComponent implements OnInit {
 
   onProtocolSelect(autopsyId: string | undefined): void {
     const e = this.isEditing ? 'edit' : 'display';
+    /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
     this.router.navigate(['/autopsy', autopsyId, e]);
   }
 
@@ -79,7 +80,7 @@ export class AutopsyComponent implements OnInit {
     }
     this.autopsyProtocolService.save(event).subscribe((data) => {
       this.snackBar.open('autopsy saved!', 'Close', {duration: 3000});
-      if(data.id) {
+      if (data.id) {
         this.onProtocolSelect(data.id);
       }
     });
@@ -98,6 +99,7 @@ export class AutopsyComponent implements OnInit {
 
   toggleEditMode(checked: boolean) {
     const e = checked ? 'edit' : 'display';
+    /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
     this.router.navigate(['/autopsy', this.autopsyId, e]);
   }
 

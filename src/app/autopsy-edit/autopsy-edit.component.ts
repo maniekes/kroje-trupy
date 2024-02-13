@@ -2,7 +2,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {async, Observable, startWith, switchMap} from "rxjs";
+import {Observable, startWith, switchMap} from "rxjs";
 import {AutoComplementService} from "../core/services/autoComplement/auto-complement.service";
 import {AutoCompletionObject} from "../core/models/auto-completion-object.model";
 import {MatFormField, MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
@@ -124,7 +124,7 @@ export class AutopsyEditComponent implements OnInit, OnChanges {
       startWith(''), // Start with an empty string to load all suggestions initially
       switchMap(value => {
         // Fetch and filter suggestions based on the current input
-        return this.autoComplementService.getSuggestions(fieldName, value);
+        return this.autoComplementService.getSuggestions(fieldName, <string>value);
       })
     );
   }
