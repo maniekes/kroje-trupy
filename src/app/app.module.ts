@@ -21,6 +21,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AutopsyModule} from "./autopsy/autopsy.module";
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,6 +43,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>  new Transl
     SharedModule,
     HomeModule,
     DetailModule,
+    AutopsyModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
