@@ -1,6 +1,6 @@
 import {AutopsyProtocol} from "../../models/autopsy-protocol.model";
 
-export var MOCKED_PROTOCOLS: AutopsyProtocol[] = [
+export const MOCKED_PROTOCOLS: AutopsyProtocol[] = [
     {id: '999', caseNumber: '123', deceasedName: 'andrzej'},
     {
         id: '997',
