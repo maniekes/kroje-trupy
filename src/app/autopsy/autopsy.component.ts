@@ -77,8 +77,11 @@ export class AutopsyComponent implements OnInit {
     if (event.id === 'new') {
       event.id = undefined;
     }
-    this.autopsyProtocolService.save(event).subscribe(() => {
+    this.autopsyProtocolService.save(event).subscribe((data) => {
       this.snackBar.open('autopsy saved!', 'Close', {duration: 3000});
+      if(data.id) {
+        this.onProtocolSelect(data.id);
+      }
     });
   }
 
