@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
-import {filter, map, Observable, switchMap} from "rxjs";
+import {filter, map, Observable, of, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ElectronService} from "../core/services";
 
@@ -37,7 +37,11 @@ export class AutopsyComponent implements OnInit {
           this.isEditing = false;
         }
         this.autopsyId = params['id'];
-        return this.autopsyProtocolService.getAutopsyProtocolById(<string>params['id']);
+        if (this.autopsyId === 'new') {
+          return of(<AutopsyProtocol>{id: 'new'})
+        } else {
+          return this.autopsyProtocolService.getAutopsyProtocolById(<string>params['id']);
+        }
       })
     ).subscribe(autopsy => {
       if (autopsy) {
@@ -66,6 +70,9 @@ export class AutopsyComponent implements OnInit {
   }
 
   saveAutopsy(event: AutopsyProtocol) {
+    if(event.id === 'new') {
+      event.id = undefined;
+    }
     this.autopsyProtocolService.save(event);
   }
 
@@ -78,5 +85,11 @@ export class AutopsyComponent implements OnInit {
 
   isElectron(): boolean {
     return this.electronService.isElectron;
+  }
+
+  toggleEditMode(checked: boolean) {
+    const e = checked ? 'edit' : 'display';
+    this.router.navigate(['/autopsy', this.autopsyId, e]);
+
   }
 }

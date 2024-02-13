@@ -1,25 +1,24 @@
-<a mat-button mat-raised-button class="noprint" color="primary" [routerLink]="['/home']">Back to Home</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="isEditing" [routerLink]="['/autopsy', autopsyId, 'display']">Display Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" [routerLink]="['/autopsy', autopsyId, 'edit']">Edit Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && !isElectron()" (click)="print()">Print Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && isElectron()" (click)="printToPDF()">Print to pdf</a>
 
-<div class="protocol-selector noprint">
-    <mat-form-field appearance="fill">
-        <mat-label>Select Protocol</mat-label>
-        <mat-select [formControl]="selectedProtocol" (selectionChange)="onProtocolSelect($event.value)">
-            <mat-option *ngFor="let protocol of protocols" [value]="protocol.id">
-                {{ protocol.caseNumber }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
+<mat-toolbar color="primary" class="noprint">
+  <a mat-icon-button [routerLink]="['/home']" matTooltip="back to home">
+    <mat-icon>home</mat-icon>
+  </a>
+  <mat-slide-toggle (change)="toggleEditMode($event.checked)" color="primary" [checked]="isEditing" matTooltip="Toggle edit mode"></mat-slide-toggle>
+  <span class="example-spacer"></span>
+  <button mat-icon-button *ngIf="!isEditing && !isElectron()" (click)="print()" matTooltip="Print"><mat-icon>print</mat-icon></button>
+  <button mat-icon-button *ngIf="!isEditing && isElectron()" (click)="printToPDF()" matTooltip="Print to PDF"><mat-icon>print</mat-icon></button>
+  <a mat-icon-button [routerLink]="['/autopsy/new/edit']" matTooltip="new protocol">
+    <mat-icon>add</mat-icon>
+  </a>
+  <button mat-icon-button [matMenuTriggerFor]="protocolsMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #protocolsMenu="matMenu">
+    <button mat-menu-item *ngFor="let protocol of protocols" (click)="onProtocolSelect(protocol.id)">
+      {{ protocol.caseNumber }}
+    </button>
+  </mat-menu>
+</mat-toolbar>
 
 <app-autopsy-display *ngIf="!isEditing" [protocol]="autopsyData"></app-autopsy-display>
 <app-autopsy-edit *ngIf="isEditing" [protocol]="autopsyData" (saveProtocol)="saveAutopsy($event)"></app-autopsy-edit>
-
-<a mat-button mat-raised-button class="noprint" color="primary" [routerLink]="['/home']">Back to Home</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="isEditing" [routerLink]="['/autopsy', autopsyId, 'display']">Display Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" [routerLink]="['/autopsy', autopsyId, 'edit']">Edit Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && !isElectron()" (click)="print()">Print Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && isElectron()" (click)="printToPDF()">Print to pdf</a>
