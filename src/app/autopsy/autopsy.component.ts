@@ -25,12 +25,14 @@ export class AutopsyComponent implements OnInit {
     }
 
     ngOnInit() {
-
+console.log('init')
         this.route.params.pipe(
             // Use switchMap to switch to a new observable each time the parameter changes
             switchMap(params => {
                 if (params['edit'] === 'edit') {
                     this.isEditing = true;
+                } else {
+                    this.isEditing = false;
                 }
                 this.autopsyId = params['id'];
                 return this.autopsyProtocolService.getAutopsyProtocolById(<string>params['id']);
@@ -59,11 +61,11 @@ export class AutopsyComponent implements OnInit {
     }
 
     printPage(): void {
-        this.router.navigate(['/autopsy', this.autopsyId]);
+        this.router.navigate(['/autopsy', this.autopsyId, 'display']);
     }
 
     onProtocolSelect(autopsyId: string): void {
-        const e = this.isEditing ? 'edit' : '';
+        const e = this.isEditing ? 'edit' : 'display';
         this.router.navigate(['/autopsy', autopsyId, e]);
     }
 

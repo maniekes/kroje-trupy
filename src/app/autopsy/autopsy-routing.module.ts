@@ -4,8 +4,8 @@ import {AutopsyComponent} from './autopsy.component';
 
 const routes: Routes = [
     {path: 'autopsy/:id/:edit', component: AutopsyComponent},
-    {path: 'autopsy/:id', component: AutopsyComponent},
-    {path: 'autopsy', redirectTo: 'autopsy/', pathMatch: 'full'}
+    {path: 'autopsy/:id', redirectTo: 'autopsy/:id/display', pathMatch: 'full'},
+    {path: 'autopsy', redirectTo: 'autopsy/new/edit', pathMatch: 'full'}
 ];
 
 @NgModule({
