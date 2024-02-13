@@ -6,6 +6,7 @@ import {filter, map, Observable, of, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ElectronService} from "../core/services";
 import {AutopsyEditComponent} from "../autopsy-edit/autopsy-edit.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-autopsy',
@@ -24,7 +25,8 @@ export class AutopsyComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private autopsyProtocolService: AutopsyService,
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -72,10 +74,12 @@ export class AutopsyComponent implements OnInit {
   }
 
   saveAutopsy(event: AutopsyProtocol) {
-    if(event.id === 'new') {
+    if (event.id === 'new') {
       event.id = undefined;
     }
-    this.autopsyProtocolService.save(event);
+    this.autopsyProtocolService.save(event).subscribe(() => {
+      this.snackBar.open('autopsy saved!', 'Close', {duration: 3000});
+    });
   }
 
   printToPDF() {

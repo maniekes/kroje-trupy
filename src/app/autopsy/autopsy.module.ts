@@ -18,6 +18,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatTooltip} from "@angular/material/tooltip";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {MatTooltip} from "@angular/material/tooltip";
     MatIconButton,
     MatIconAnchor,
     MatTooltip,
-    MatMenuItem
+    MatMenuItem,
+    MatSnackBarModule
   ]
 })
 export class AutopsyModule {
