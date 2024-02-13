@@ -48,20 +48,8 @@ console.log('init')
             .subscribe(protocols => this.protocols = protocols); // Fetch the protocols
     }
 
-    goBack(): void {
-        this.router.navigate(['/']); // Navigates back to the home/main page
-    }
-
     print(): void {
         window.print();
-    }
-
-    editPage(): void {
-        this.router.navigate(['/autopsy', this.autopsyId, 'edit']);
-    }
-
-    printPage(): void {
-        this.router.navigate(['/autopsy', this.autopsyId, 'display']);
     }
 
     onProtocolSelect(autopsyId: string): void {

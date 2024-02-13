@@ -89,20 +89,23 @@ export class AutopsyEditComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        this.setupForm(this.protocol);
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['protocol'] && changes['protocol'].currentValue) {
+            this.setupForm(<AutopsyProtocol>changes['protocol'].currentValue);
+        }
+    }
+
+    setupForm(protocol: AutopsyProtocol) {
         this.autopsyForm.reset();
-        this.autopsyForm.patchValue(this.protocol);
+        this.autopsyForm.patchValue(protocol);
         this.setupAutocomplete('brain');
         this.setupAutocomplete('liver');
         this.setupAutocomplete('heart');
         this.setupAutocomplete('lungs');
         this.setupAutocomplete('kidneys');
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['protocol'] && changes['protocol'].currentValue) {
-            this.autopsyForm.reset();
-            this.autopsyForm.patchValue(changes['protocol'].currentValue);
-        }
     }
 
     saveAutopsy() {
