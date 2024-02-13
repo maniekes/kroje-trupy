@@ -1,6 +1,7 @@
-import {app, BrowserWindow, screen} from 'electron';
+import {app, BrowserWindow, ipcRenderer, screen, ipcMain, dialog} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as os from "os";
 
 let win: BrowserWindow | null = null;
 const args = process.argv.slice(1),
@@ -9,6 +10,30 @@ const args = process.argv.slice(1),
 function createWindow(): BrowserWindow {
 
   const size = screen.getPrimaryDisplay().workAreaSize;
+
+  ipcMain.on('print-to-pdf', event => {
+    dialog.showSaveDialog({
+      title: "select file to save",
+      filters: [{name: '', extensions: ['pdf']}]
+    }).then(options => {
+      const pdfPath = options.filePath;
+      if (pdfPath) {
+        win?.webContents.printToPDF({}).then(data => {
+          fs.writeFile(pdfPath, data, (error) => {
+            if (error) throw error
+            console.log(`Wrote PDF successfully to ${pdfPath}`)
+          })
+        }).catch(error => {
+          console.log(`Failed to write PDF to ${pdfPath}: `, error)
+        })
+      }
+    })
+  });
+
+  ipcMain.on('print', () => {
+    win?.webContents.print({});
+  });
+
 
   // Create the browser window.
   win = new BrowserWindow({
@@ -34,7 +59,7 @@ function createWindow(): BrowserWindow {
     let pathIndex = './index.html';
 
     if (fs.existsSync(path.join(__dirname, '../dist/index.html'))) {
-       // Path when running electron in local folder
+      // Path when running electron in local folder
       pathIndex = '../dist/index.html';
     }
 

@@ -50,6 +50,14 @@ export class ElectronService {
     }
   }
 
+  saveToPDF(){
+    this.ipcRenderer.send('print-to-pdf');
+  }
+
+  print(){
+    this.ipcRenderer.send('print');
+  }
+
   get isElectron(): boolean {
     return !!(window && window.process && window.process.type);
   }

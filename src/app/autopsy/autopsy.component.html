@@ -1,7 +1,8 @@
 <a mat-button mat-raised-button class="noprint" color="primary" [routerLink]="['/home']">Back to Home</a>
 <a mat-button mat-raised-button class="noprint" color="primary" *ngIf="isEditing" [routerLink]="['/autopsy', autopsyId, 'display']">Display Report</a>
 <a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" [routerLink]="['/autopsy', autopsyId, 'edit']">Edit Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" (click)="print()">Print Report</a>
+<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && !isElectron()" (click)="print()">Print Report</a>
+<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && isElectron()" (click)="printToPDF()">Print to pdf</a>
 
 <div class="protocol-selector noprint">
     <mat-form-field appearance="fill">
@@ -20,4 +21,5 @@
 <a mat-button mat-raised-button class="noprint" color="primary" [routerLink]="['/home']">Back to Home</a>
 <a mat-button mat-raised-button class="noprint" color="primary" *ngIf="isEditing" [routerLink]="['/autopsy', autopsyId, 'display']">Display Report</a>
 <a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" [routerLink]="['/autopsy', autopsyId, 'edit']">Edit Report</a>
-<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing" (click)="print()">Print Report</a>
+<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && !isElectron()" (click)="print()">Print Report</a>
+<a mat-button mat-raised-button class="noprint" color="primary" *ngIf="!isEditing && isElectron()" (click)="printToPDF()">Print to pdf</a>
