@@ -13,8 +13,11 @@
       <p>{{ protocol.deceasedName }}</p>
     </mat-card-content>
     <mat-card-actions>
+      <a mat-button mat-raised-button color="accent" [routerLink]="['/autopsy', protocol.id, 'display']">
+        Show
+      </a>
       <a mat-button mat-raised-button color="accent" [routerLink]="['/autopsy', protocol.id, 'edit']">
-        Edit Report
+        Edit
       </a>
     </mat-card-actions>
   </mat-card>
