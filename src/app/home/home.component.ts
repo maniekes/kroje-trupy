@@ -24,4 +24,9 @@ export class HomeComponent implements OnInit {
     this.autopsyProtocolService.getAutopsyProtocols().subscribe(protocols => this.protocols = protocols);
   }
 
+  downloadAutopsy(id: string | undefined) {
+    if(id) {
+      this.autopsyProtocolService.downloadAutopsy(id);
+    }
+  }
 }

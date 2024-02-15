@@ -109,4 +109,10 @@ export class AutopsyComponent implements OnInit {
       this.autopsyEditComponent.saveAutopsy();
     }
   }
+
+  downloadAutopsy() {
+    if (this.autopsyId) {
+      this.autopsyProtocolService.downloadAutopsy(this.autopsyId);
+    }
+  }
 }
