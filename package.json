@@ -1,23 +1,20 @@
 {
-  "name": "angular-electron",
-  "version": "14.0.0",
-  "description": "Angular 17 with Electron 27 (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "kroje-trupy",
+  "version": "1.0.0",
+  "description": "Small web and desktop application for creating/editing Autopsy protocols and printing them.",
+  "homepage": "https://github.com/maniekes/kroje-trupy",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Rafal Klimonda",
+    "email": "rafal@klimonda.pl"
   },
   "keywords": [
+    "autopsy",
+    "protocol",
+    "print-to-pdf",
     "angular",
-    "angular 17",
     "electron",
-    "electron 27",
     "nodejs",
     "typescript",
-    "jest",
-    "playwright",
-    "eslint",
-    "sass",
     "windows",
     "mac",
     "linux"

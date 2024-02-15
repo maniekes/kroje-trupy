@@ -9,7 +9,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-electron": {
+    "kroje-trupy": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -116,27 +116,27 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "angular-electron:build"
+            "browserTarget": "kroje-trupy:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "angular-electron:build:dev"
+              "browserTarget": "kroje-trupy:build:dev"
             },
             "production": {
-              "browserTarget": "angular-electron:build:production"
+              "browserTarget": "kroje-trupy:build:production"
             },
             "web": {
-              "browserTarget": "angular-electron:build:web"
+              "browserTarget": "kroje-trupy:build:web"
             },
             "web-production": {
-              "browserTarget": "angular-electron:build:web-production"
+              "browserTarget": "kroje-trupy:build:web-production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-electron:build"
+            "buildTarget": "kroje-trupy:build"
           }
         },
         "test": {
@@ -158,7 +158,7 @@
         }
       }
     },
-    "angular-electron-e2e": {
+    "kroje-trupy-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {

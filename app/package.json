@@ -1,11 +1,12 @@
 {
-  "name": "angular-electron",
-  "description": "Angular Electron sample",
+  "name": "kroje-trupy",
+  "description": "Small web and desktop application for creating/editing Autopsy protocols and printing them.",
+  "homepage": "https://github.com/maniekes/kroje-trupy",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Rafal Klimonda",
+    "email": "rafal@klimonda.pl"
   },
-  "version": "14.0.0",
+  "version": "1.0.0",
   "main": "main.js",
   "private": true,
   "dependencies": {
