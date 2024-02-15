@@ -63,9 +63,15 @@ jobs:
     - name: Build the app
       run: npm run electron:build
 
-    - name: Archive production artifacts
+    - name: Archive installation package
       uses: actions/upload-artifact@v4
       with:
-        name: dist-without-markdown
+        name: installation-package
         path: |
-          release
+          release/*.exe
+    - name: Archive unpacked application
+      uses: actions/upload-artifact@v4
+      with:
+        name: unpacked-application
+        path: |
+          release/win-unpacked
