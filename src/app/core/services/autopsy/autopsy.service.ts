@@ -49,8 +49,8 @@ export class AutopsyService {
 
   downloadAutopsy(id: string): void {
     this.getAutopsyProtocolById(id).subscribe(autopsy => {
-      if(autopsy) {
-        this.downloadJSON(autopsy, autopsy.caseNumber+'.json');
+      if (autopsy) {
+        this.downloadJSON(autopsy, autopsy.caseNumber + '.json');
       }
     })
   }
@@ -59,7 +59,7 @@ export class AutopsyService {
     // Convert the data to a JSON string
     const jsonString = JSON.stringify(data);
     // Create a Blob from the JSON string
-    const blob = new Blob([jsonString], { type: 'application/json' });
+    const blob = new Blob([jsonString], {type: 'application/json'});
     // Create a URL for the blob
     const url = URL.createObjectURL(blob);
 
@@ -73,4 +73,29 @@ export class AutopsyService {
     URL.revokeObjectURL(url); // Release the created URL
   }
 
+
+  uploadAutopsy(file: File): void {
+    this.parseAutopsyFile(file).then(autopsy => {
+        autopsy.id = undefined;
+        this.save(autopsy);
+      }
+    ).catch(error => console.log(error));
+  }
+
+  private parseAutopsyFile(file: File): Promise<AutopsyProtocol> {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        try {
+          const json = JSON.parse(fileReader.result as string);
+          // Assuming the JSON structure directly matches AutopsyProtocol[]
+          resolve(json as AutopsyProtocol);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      fileReader.onerror = (error) => reject(error);
+      fileReader.readAsText(file);
+    });
+  }
 }

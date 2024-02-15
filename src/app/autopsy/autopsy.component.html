@@ -5,6 +5,7 @@
   </a>
   <mat-slide-toggle (change)="toggleEditMode($event.checked)" color="primary" [checked]="isEditing" matTooltip="Toggle edit mode"></mat-slide-toggle>
   <span class="example-spacer"></span>
+  <app-autopsy-upload></app-autopsy-upload>
   <button mat-icon-button (click)="downloadAutopsy()" matTooltip="Save Autopsy"><mat-icon>download</mat-icon></button>
   <button mat-icon-button *ngIf="isEditing" (click)="triggerSaveAutopsy()" matTooltip="Save Autopsy"><mat-icon>save</mat-icon></button>
   <button mat-icon-button *ngIf="!isEditing && !isElectron()" (click)="print()" matTooltip="Print"><mat-icon>print</mat-icon></button>

@@ -19,51 +19,53 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AutopsyUploadComponent} from "../autopsy-upload/autopsy-upload.component";
 
 
 @NgModule({
     declarations: [
         AutopsyComponent
     ],
-  imports: [
-    CommonModule,
-    AutopsyRoutingModule,
-    MatButton,
-    MatFormField,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    ReactiveFormsModule,
-    AutopsyDisplayComponent,
-    MatAutocompleteModule,
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    MatFormField,
-    MatLabel,
-    MatFormField,
-    MatSelect,
-    MatHint,
-    MatFormFieldModule,
-    MatOption,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatButton,
-    MatInput,
-    AutopsyEditComponent,
-    MatAnchor,
-    MatToolbar,
-    MatIcon,
-    MatSlideToggle,
-    MatMenu,
-    MatMenuTrigger,
-    MatIconButton,
-    MatIconAnchor,
-    MatTooltip,
-    MatMenuItem,
-    MatSnackBarModule
-  ]
+    imports: [
+        CommonModule,
+        AutopsyRoutingModule,
+        MatButton,
+        MatFormField,
+        MatLabel,
+        MatOption,
+        MatSelect,
+        ReactiveFormsModule,
+        AutopsyDisplayComponent,
+        MatAutocompleteModule,
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        MatFormField,
+        MatLabel,
+        MatFormField,
+        MatSelect,
+        MatHint,
+        MatFormFieldModule,
+        MatOption,
+        MatDatepickerToggle,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatButton,
+        MatInput,
+        AutopsyEditComponent,
+        MatAnchor,
+        MatToolbar,
+        MatIcon,
+        MatSlideToggle,
+        MatMenu,
+        MatMenuTrigger,
+        MatIconButton,
+        MatIconAnchor,
+        MatTooltip,
+        MatMenuItem,
+        MatSnackBarModule,
+        AutopsyUploadComponent
+    ]
 })
 export class AutopsyModule {
 }
