@@ -115,4 +115,12 @@ export class AutopsyComponent implements OnInit {
       this.autopsyProtocolService.downloadAutopsy(this.autopsyId);
     }
   }
+
+  deleteAutopsy() {
+    if (this.autopsyId) {
+      this.autopsyProtocolService.deleteAutopsy(this.autopsyId);
+      /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
+      this.router.navigate(['/autopsy', 'new', 'edit']);
+    }
+  }
 }

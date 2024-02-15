@@ -15,6 +15,9 @@
       <p>{{ protocol.deceasedName }}</p>
     </mat-card-content>
     <mat-card-actions>
+      <a mat-button mat-raised-button color="accent" (click)="removeAutopsy(protocol.id)" >
+        Remove
+      </a>
       <a mat-button mat-raised-button color="accent" (click)="downloadAutopsy(protocol.id)" >
         Download
       </a>

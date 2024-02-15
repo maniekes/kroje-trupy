@@ -25,8 +25,14 @@ export class HomeComponent implements OnInit {
   }
 
   downloadAutopsy(id: string | undefined) {
-    if(id) {
+    if (id) {
       this.autopsyProtocolService.downloadAutopsy(id);
+    }
+  }
+
+  removeAutopsy(id: string | undefined) {
+    if (id) {
+      this.autopsyProtocolService.deleteAutopsy(id);
     }
   }
 }

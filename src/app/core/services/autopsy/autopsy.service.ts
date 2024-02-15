@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AutopsyProtocol} from "../../models/autopsy-protocol.model";
-import {Observable, of} from "rxjs";
+import {Observable, of, throwError} from "rxjs";
 import {MOCKED_PROTOCOLS} from "./mock.data";
 
 @Injectable({
@@ -97,5 +97,15 @@ export class AutopsyService {
       fileReader.onerror = (error) => reject(error);
       fileReader.readAsText(file);
     });
+  }
+
+  deleteAutopsy(id: string): Observable<AutopsyProtocol> {
+    const index = this.mockAutopsyProtocols.findIndex(protocol => protocol.id === id);
+    if (index !== -1) {
+      const removed = this.mockAutopsyProtocols[index];
+      this.mockAutopsyProtocols.splice(index, 1);
+      return of(removed);
+    }
+    return throwError(() => `autopsy with id ${id} not found!`);
   }
 }
