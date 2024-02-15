@@ -8,23 +8,20 @@
   <!-- This could be dynamically generated based on your data -->
   <mat-card class="report-card" *ngFor="let protocol of protocols">
     <mat-card-header>
-      <mat-card-title>{{ protocol.caseNumber }}</mat-card-title>
+      <mat-card-title><a [routerLink]="['/autopsy', protocol.id, 'display']">{{ protocol.caseNumber }}</a></mat-card-title>
       <mat-card-subtitle>{{ protocol.dateOfAutopsy | date }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>{{ protocol.deceasedName }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <a mat-button mat-raised-button color="accent" (click)="removeAutopsy(protocol.id)" >
+      <a mat-button mat-raised-button color="primary" (click)="removeAutopsy(protocol.id)" >
         Remove
       </a>
-      <a mat-button mat-raised-button color="accent" (click)="downloadAutopsy(protocol.id)" >
+      <a mat-button mat-raised-button color="primary" (click)="downloadAutopsy(protocol.id)" >
         Download
       </a>
-      <a mat-button mat-raised-button color="accent" [routerLink]="['/autopsy', protocol.id, 'display']">
-        Show
-      </a>
-      <a mat-button mat-raised-button color="accent" [routerLink]="['/autopsy', protocol.id, 'edit']">
+      <a mat-button mat-raised-button color="primary" [routerLink]="['/autopsy', protocol.id, 'edit']">
         Edit
       </a>
     </mat-card-actions>
