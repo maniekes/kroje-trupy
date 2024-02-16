@@ -20,10 +20,11 @@ export class AutopsyUploadComponent {
   }
 
   onFileSelected(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      const file: File = event.target.files[0];
-      this.autopsyService.uploadAutopsy(file)
-        .subscribe({error: err => console.error(err)});
+    if (event.target.files) {
+      for (const file of event.target.files) {
+        this.autopsyService.uploadAutopsy(<File>file)
+          .subscribe({error: err => console.error(err)})
+      }
     }
   }
 }

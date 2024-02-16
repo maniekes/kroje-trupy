@@ -1,5 +1,5 @@
 <label>
-  <input type="file" (change)="onFileSelected($event)" style="display:none;" accept=".json" #fileUpload/>
+  <input type="file" (change)="onFileSelected($event)" style="display:none;" accept=".json" multiple #fileUpload/>
   <button mat-icon-button aria-label="Upload JSON" (click)="fileUpload.click()" matTooltip="upload autopsy">
     <mat-icon>file_upload</mat-icon>
   </button>
