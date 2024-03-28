@@ -1,8 +1,24 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {Observable, startWith, switchMap} from "rxjs";
+import {
+  debounce, debounceTime,
+  distinctUntilChanged,
+  distinctUntilKeyChanged,
+  Observable,
+  startWith,
+  switchMap
+} from "rxjs";
 import {AutoComplementService} from "../core/services/autoComplement/auto-complement.service";
 import {AutoCompletionObject} from "../core/models/auto-completion-object.model";
 import {MatFormField, MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
@@ -132,4 +148,39 @@ export class AutopsyEditComponent implements OnInit, OnChanges {
   displayFn(suggestion: AutoCompletionObject): string {
     return suggestion && suggestion.value ? suggestion.value : '';
   }
+}
+
+
+export class AutopsyEditComponent2 {
+  fb = inject(FormBuilder);
+  dataService = inject(AutoComplementService);
+
+  data =
+
+  form = this.fb.nonNullable.group({
+    heart: '',
+    lungs: '',
+  })
+
+  preselect() {
+    this.form.patchValue({
+      heart: 'Normal',
+      lungs: 'Normal',
+    })
+  }
+
+  heart$ = this.form.controls.heart.valueChanges
+    .pipe(
+    startWith(''),
+    distinctUntilChanged(),
+    debounceTime(300),
+    switchMap(value => this.dataService.getSuggestions('heart', value))
+  );
+
+  lungs$ = this.form.controls.lungs.valueChanges;
+
+  save() {
+  const result= this.form.getRawValue();
+  }
+
 }

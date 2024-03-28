@@ -81,15 +81,19 @@
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Heart</mat-label>
-        <input type="text" matInput formControlName="heart" [matAutocomplete]="heartAuto">
-        <mat-autocomplete #heartAuto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let suggestion of filteredSuggestions.heart | async" [value]="suggestion">
-            {{suggestion.value}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+
+      @if (heart$| async; as data) {
+        <mat-form-field appearance="fill">
+          <mat-label>Heart</mat-label>
+          <input type="text" matInput formControlName="heart" [matAutocomplete]="heartAuto">
+          <mat-autocomplete #heartAuto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let suggestion of data" [value]="suggestion">
+              {{suggestion.value}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      }
+
 
       <!-- Repeat for other internal organs as needed -->
       <mat-form-field appearance="fill">
