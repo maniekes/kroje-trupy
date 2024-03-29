@@ -71,56 +71,53 @@
     </mat-form-field>
 
     <div formGroupName="internalExamination">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="brain$ | async as data">
         <mat-label>Brain</mat-label>
         <input type="text" matInput formControlName="brain" [matAutocomplete]="brainAuto">
-        <mat-autocomplete #brainAuto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let suggestion of filteredSuggestions.brain | async" [value]="suggestion">
+        <mat-autocomplete #brainAuto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.value">
             {{suggestion.value}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
-
-      @if (heart$| async; as data) {
-        <mat-form-field appearance="fill">
-          <mat-label>Heart</mat-label>
-          <input type="text" matInput formControlName="heart" [matAutocomplete]="heartAuto">
-          <mat-autocomplete #heartAuto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let suggestion of data" [value]="suggestion">
-              {{suggestion.value}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      }
+      <mat-form-field appearance="fill" *ngIf="heart$ | async as data">
+        <mat-label>Heart</mat-label>
+        <input type="text" matInput formControlName="heart" [matAutocomplete]="heartAuto">
+        <mat-autocomplete #heartAuto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.value">
+            {{suggestion.value}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
 
       <!-- Repeat for other internal organs as needed -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="lungs$ | async as data">
         <mat-label>Lungs</mat-label>
         <input type="text" matInput formControlName="lungs" [matAutocomplete]="lungsAuto">
-        <mat-autocomplete #lungsAuto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let suggestion of filteredSuggestions.lungs | async" [value]="suggestion">
+        <mat-autocomplete #lungsAuto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.value">
             {{suggestion.value}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="liver$ | async as data">
         <mat-label>Liver</mat-label>
         <input type="text" matInput formControlName="liver" [matAutocomplete]="liverAuto">
-        <mat-autocomplete #liverAuto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let suggestion of filteredSuggestions.liver | async" [value]="suggestion">
+        <mat-autocomplete #liverAuto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.value">
             {{suggestion.value}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="kidneys$ | async as data">
         <mat-label>Kidneys</mat-label>
         <input type="text" matInput formControlName="kidneys" [matAutocomplete]="kidneysAuto">
-        <mat-autocomplete #kidneysAuto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let suggestion of filteredSuggestions.kidneys | async" [value]="suggestion">
+        <mat-autocomplete #kidneysAuto="matAutocomplete">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.value">
             {{suggestion.value}}
           </mat-option>
         </mat-autocomplete>

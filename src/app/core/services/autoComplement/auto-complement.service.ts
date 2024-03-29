@@ -36,7 +36,7 @@ export class AutoComplementService {
   constructor() {
   }
 
-  getSuggestions(fieldName: string, searchTerm: string = ''): Observable<AutoCompletionObject[]> {
+  getSuggestions(fieldName: string, searchTerm: string | null = ''): Observable<AutoCompletionObject[]> {
     // Ensure searchTerm is treated as a string
     const searchTermStr = String(searchTerm).toLowerCase();
     // Assuming mockSuggestions is an array of AutoCompletionObject

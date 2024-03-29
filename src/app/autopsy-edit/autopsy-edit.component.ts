@@ -4,23 +4,18 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges
 } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
 import {
-  debounce, debounceTime,
+  debounceTime,
   distinctUntilChanged,
-  distinctUntilKeyChanged,
-  Observable,
   startWith,
   switchMap
 } from "rxjs";
 import {AutoComplementService} from "../core/services/autoComplement/auto-complement.service";
-import {AutoCompletionObject} from "../core/models/auto-completion-object.model";
 import {MatFormField, MatFormFieldModule, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
@@ -64,66 +59,58 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   ],
   styleUrl: './autopsy-edit.component.scss'
 })
-export class AutopsyEditComponent implements OnInit, OnChanges {
+export class AutopsyEditComponent implements OnInit {
+
+  fb = inject(FormBuilder);
+  dataService = inject(AutoComplementService);
+  snackBar = inject(MatSnackBar);
+
+  autopsyForm = this.fb.group({
+    id: [''],
+    caseNumber: ['', Validators.required],
+    deceasedName: [''],
+    age: [null],
+    gender: [null],
+    dateOfDeath: [null],
+    dateOfAutopsy: [''],
+    placeOfDeath: [''],
+    causeOfDeath: [''],
+    mannerOfDeath: [null],
+    autopsyPerformedBy: [''],
+    findings: this.fb.group({
+      externalExamination: [''],
+      internalExamination: this.fb.group({
+        brain: [''],
+        heart: [''],
+        lungs: [''],
+        liver: [''],
+        kidneys: [''],
+        otherNotes: ['']
+      }),
+      toxicologyResults: [''],
+      microscopicExaminations: [''],
+      conclusion: ['']
+    })
+  });
 
   @Input() protocol: AutopsyProtocol = {};
   @Output() saveProtocol = new EventEmitter<AutopsyProtocol>();
 
-  autopsyForm: FormGroup;
-  filteredSuggestions: { [key: string]: Observable<AutoCompletionObject[]> } = {};
 
-  constructor(
-    private fb: FormBuilder,
-    private autoComplementService: AutoComplementService,
-    private snackBar: MatSnackBar
-  ) {
-    this.autopsyForm = this.fb.group({
-      id: [''],
-      caseNumber: ['', Validators.required],
-      deceasedName: [''],
-      age: [null],
-      gender: [null],
-      dateOfDeath: [null],
-      dateOfAutopsy: [''],
-      placeOfDeath: [''],
-      causeOfDeath: [''],
-      mannerOfDeath: [null],
-      autopsyPerformedBy: [''],
-      findings: this.fb.group({
-        externalExamination: [''],
-        internalExamination: this.fb.group({
-          brain: [''],
-          heart: [''],
-          lungs: [''],
-          liver: [''],
-          kidneys: [''],
-          otherNotes: ['']
-        }),
-        toxicologyResults: [''],
-        microscopicExaminations: [''],
-        conclusion: ['']
-      })
-    });
-  }
+  brain$ = this.buildAutoComplete('brain');
+  heart$ = this.buildAutoComplete('heart');
+  lungs$ = this.buildAutoComplete('lungs');
+  kidneys$ = this.buildAutoComplete('kidneys');
+  liver$ = this.buildAutoComplete('liver');
 
-  ngOnInit() {
-    this.setupForm(this.protocol);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['protocol'] && changes['protocol'].currentValue) {
-      this.setupForm(<AutopsyProtocol>changes['protocol'].currentValue);
-    }
-  }
-
-  setupForm(protocol: AutopsyProtocol) {
-    this.autopsyForm.reset();
-    this.autopsyForm.patchValue(protocol);
-    this.setupAutocomplete('brain');
-    this.setupAutocomplete('liver');
-    this.setupAutocomplete('heart');
-    this.setupAutocomplete('lungs');
-    this.setupAutocomplete('kidneys');
+  buildAutoComplete(field: string) {
+    return this.autopsyForm.get(`findings.internalExamination.${field}`)?.valueChanges
+      .pipe(
+        startWith(''),
+        distinctUntilChanged(),
+        debounceTime(300),
+        switchMap(value => this.dataService.getSuggestions(field, <string>value))
+      );
   }
 
   saveAutopsy() {
@@ -134,53 +121,7 @@ export class AutopsyEditComponent implements OnInit, OnChanges {
     }
   }
 
-  private setupAutocomplete(fieldName: string): void {
-    const control = this.autopsyForm.get(`findings.internalExamination.${fieldName}`) as FormControl;
-    this.filteredSuggestions[fieldName] = control.valueChanges.pipe(
-      startWith(''), // Start with an empty string to load all suggestions initially
-      switchMap(value => {
-        // Fetch and filter suggestions based on the current input
-        return this.autoComplementService.getSuggestions(fieldName, <string>value);
-      })
-    );
+  ngOnInit(): void {
+    this.autopsyForm.patchValue(<object>this.protocol);
   }
-
-  displayFn(suggestion: AutoCompletionObject): string {
-    return suggestion && suggestion.value ? suggestion.value : '';
-  }
-}
-
-
-export class AutopsyEditComponent2 {
-  fb = inject(FormBuilder);
-  dataService = inject(AutoComplementService);
-
-  data =
-
-  form = this.fb.nonNullable.group({
-    heart: '',
-    lungs: '',
-  })
-
-  preselect() {
-    this.form.patchValue({
-      heart: 'Normal',
-      lungs: 'Normal',
-    })
-  }
-
-  heart$ = this.form.controls.heart.valueChanges
-    .pipe(
-    startWith(''),
-    distinctUntilChanged(),
-    debounceTime(300),
-    switchMap(value => this.dataService.getSuggestions('heart', value))
-  );
-
-  lungs$ = this.form.controls.lungs.valueChanges;
-
-  save() {
-  const result= this.form.getRawValue();
-  }
-
 }
