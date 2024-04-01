@@ -4,15 +4,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 
-
 import {AppRoutingModule} from './app-routing.module';
 
 // NG Translate
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-import {HomeModule} from './home/home.module';
-import {DetailModule} from './detail/detail.module';
 
 import {AppComponent} from './app.component';
 import {MatInputModule} from "@angular/material/input";
@@ -21,7 +17,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AutopsyModule} from "./autopsy/autopsy.module";
 import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from "@angular/common";
 import {APP_CONFIG} from "../environments/environment";
 
@@ -41,18 +36,15 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => new Transla
     MatNativeDateModule,
     FormsModule,
     HttpClientModule,
-    HomeModule,
-    DetailModule,
-    AutopsyModule,
     AppRoutingModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: httpLoaderFactory,
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
     })
-],
+  ],
   providers: [
     {
       provide: LocationStrategy,
