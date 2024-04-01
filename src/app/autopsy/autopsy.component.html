@@ -8,9 +8,15 @@
   <button mat-icon-button (click)="deleteAutopsy()" matTooltip="Delete Autopsy"><mat-icon>delete</mat-icon></button>
   <app-autopsy-upload></app-autopsy-upload>
   <button mat-icon-button (click)="downloadAutopsy()" matTooltip="Download Autopsy"><mat-icon>download</mat-icon></button>
-  <button mat-icon-button *ngIf="isEditing" (click)="triggerSaveAutopsy()" matTooltip="Save Autopsy"><mat-icon>save</mat-icon></button>
-  <button mat-icon-button *ngIf="!isEditing && !isElectron()" (click)="print()" matTooltip="Print"><mat-icon>print</mat-icon></button>
-  <button mat-icon-button *ngIf="!isEditing && isElectron()" (click)="printToPDF()" matTooltip="Print to PDF"><mat-icon>print</mat-icon></button>
+  @if (isEditing) {
+    <button mat-icon-button (click)="triggerSaveAutopsy()" matTooltip="Save Autopsy"><mat-icon>save</mat-icon></button>
+  }
+  @if (!isEditing && !isElectron()) {
+    <button mat-icon-button (click)="print()" matTooltip="Print"><mat-icon>print</mat-icon></button>
+  }
+  @if (!isEditing && isElectron()) {
+    <button mat-icon-button (click)="printToPDF()" matTooltip="Print to PDF"><mat-icon>print</mat-icon></button>
+  }
   <a mat-icon-button [routerLink]="['/autopsy/new/edit']" matTooltip="new protocol">
     <mat-icon>add</mat-icon>
   </a>
@@ -18,11 +24,17 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #protocolsMenu="matMenu">
-    <button mat-menu-item *ngFor="let protocol of protocols" (click)="onProtocolSelect(protocol.id)">
-      {{ protocol.caseNumber }}
-    </button>
+    @for (protocol of protocols; track protocol) {
+      <button mat-menu-item (click)="onProtocolSelect(protocol.id)">
+        {{ protocol.caseNumber }}
+      </button>
+    }
   </mat-menu>
 </mat-toolbar>
 
-<app-autopsy-display *ngIf="!isEditing" [protocol]="autopsyData"></app-autopsy-display>
-<app-autopsy-edit *ngIf="isEditing" [protocol]="autopsyData" (saveProtocol)="saveAutopsy($event)"></app-autopsy-edit>
+@if (!isEditing) {
+  <app-autopsy-display [protocol]="autopsyData"></app-autopsy-display>
+}
+@if (isEditing) {
+  <app-autopsy-edit [protocol]="autopsyData" (saveProtocol)="saveAutopsy($event)"></app-autopsy-edit>
+}

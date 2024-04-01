@@ -6,24 +6,27 @@
 
 <div class="container">
   <!-- This could be dynamically generated based on your data -->
-  <mat-card class="report-card" *ngFor="let protocol of protocols">
-    <mat-card-header>
-      <mat-card-title><a [routerLink]="['/autopsy', protocol.id, 'display']">{{ protocol.caseNumber }}</a></mat-card-title>
-      <mat-card-subtitle>{{ protocol.dateOfAutopsy | date }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ protocol.deceasedName }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button mat-raised-button color="primary" (click)="removeAutopsy(protocol.id)" >
-        Remove
-      </a>
-      <a mat-button mat-raised-button color="primary" (click)="downloadAutopsy(protocol.id)" >
-        Download
-      </a>
-      <a mat-button mat-raised-button color="primary" [routerLink]="['/autopsy', protocol.id, 'edit']">
-        Edit
-      </a>
-    </mat-card-actions>
-  </mat-card>
+  @for (protocol of protocols; track protocol) {
+    <mat-card class="report-card">
+      <mat-card-header>
+        <mat-card-title><a [routerLink]="['/autopsy', protocol.id, 'display']">{{ protocol.caseNumber }}</a>
+        </mat-card-title>
+        <mat-card-subtitle>{{ protocol.dateOfAutopsy | date }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ protocol.deceasedName }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button mat-raised-button color="primary" (click)="removeAutopsy(protocol.id)">
+          Remove
+        </a>
+        <a mat-button mat-raised-button color="primary" (click)="downloadAutopsy(protocol.id)">
+          Download
+        </a>
+        <a mat-button mat-raised-button color="primary" [routerLink]="['/autopsy', protocol.id, 'edit']">
+          Edit
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  }
 </div>
