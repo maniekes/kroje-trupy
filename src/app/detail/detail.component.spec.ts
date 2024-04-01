@@ -11,9 +11,8 @@ describe('DetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     void TestBed.configureTestingModule({
-      declarations: [DetailComponent],
-      imports: [TranslateModule.forRoot(), RouterTestingModule]
-    }).compileComponents();
+    imports: [TranslateModule.forRoot(), RouterTestingModule, DetailComponent]
+}).compileComponents();
 
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;

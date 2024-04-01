@@ -23,9 +23,6 @@ import {AutopsyUploadComponent} from "../autopsy-upload/autopsy-upload.component
 
 
 @NgModule({
-    declarations: [
-        AutopsyComponent
-    ],
     imports: [
         CommonModule,
         AutopsyRoutingModule,
@@ -64,7 +61,8 @@ import {AutopsyUploadComponent} from "../autopsy-upload/autopsy-upload.component
         MatTooltip,
         MatMenuItem,
         MatSnackBarModule,
-        AutopsyUploadComponent
+        AutopsyUploadComponent,
+        AutopsyComponent
     ]
 })
 export class AutopsyModule {

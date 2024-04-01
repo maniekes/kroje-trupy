@@ -8,8 +8,8 @@ describe('AutopsyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AutopsyComponent]
-    })
+    imports: [AutopsyComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(AutopsyComponent);

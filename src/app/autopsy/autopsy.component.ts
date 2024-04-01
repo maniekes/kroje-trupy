@@ -1,17 +1,27 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AutopsyProtocol} from "../core/models/autopsy-protocol.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import {AutopsyService} from "../core/services/autopsy/autopsy.service";
 import {of, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {ElectronService} from "../core/services";
 import {AutopsyEditComponent} from "../autopsy-edit/autopsy-edit.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { AutopsyDisplayComponent } from '../autopsy-display/autopsy-display.component';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { AutopsyUploadComponent } from '../autopsy-upload/autopsy-upload.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIconAnchor, MatIconButton } from '@angular/material/button';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'app-autopsy',
-  templateUrl: './autopsy.component.html',
-  styleUrl: './autopsy.component.scss'
+    selector: 'app-autopsy',
+    templateUrl: './autopsy.component.html',
+    styleUrl: './autopsy.component.scss',
+    standalone: true,
+    imports: [MatToolbar, MatIconAnchor, MatTooltip, RouterLink, MatIcon, MatSlideToggle, MatIconButton, AutopsyUploadComponent, MatMenuTrigger, MatMenu, MatMenuItem, AutopsyDisplayComponent, AutopsyEditComponent]
 })
 export class AutopsyComponent implements OnInit {
   autopsyData: AutopsyProtocol = {};
