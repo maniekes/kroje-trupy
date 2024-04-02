@@ -142,9 +142,15 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "polyfills": ["src/polyfills-test.ts"],
+            "polyfills": [
+              "src/polyfills-test.ts"
+            ],
             "tsConfig": "src/tsconfig.spec.json",
-            "globalMocks": ["styleTransform", "matchMedia", "getComputedStyle"],
+            "globalMocks": [
+              "styleTransform",
+              "matchMedia",
+              "getComputedStyle"
+            ]
           }
         },
         "lint": {
@@ -153,20 +159,6 @@
             "lintFilePatterns": [
               "src/**/*.ts",
               "src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "kroje-trupy-e2e": {
-      "root": "e2e",
-      "projectType": "application",
-      "architect": {
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "e2e/**/*.ts"
             ]
           }
         }
